@@ -2,46 +2,46 @@
 Introducció a Vagrant
 Per a cada projecte vagrant utilitza un directori, com a exemple podem crear el directori example per treballar amb una MV d'Ubuntu 22.04 Jammy Jellyfish.
 
-[alumne@elpuig ~]$ mkdir example
-[alumne@elpuig ~]$ cd example/
+*[alumne@elpuig ~]$ mkdir example
+*[alumne@elpuig ~]$ cd example/
 
 En el primer pas, farem igual que la propera
 
-[alumne@elpuig example]$ vagrant init ubuntu/jammy64
+*[alumne@elpuig example]$ vagrant init ubuntu/jammy64
 
 ..
-A `Vagrantfile` has been placed in this directory. You are now
-ready to `vagrant up` your first virtual environment! Please read
-the comments in the Vagrantfile as well as documentation on
-`vagrantup.com` for more information on using Vagrant.
+ A `Vagrantfile` has been placed in this directory. You are now
+ ready to `vagrant up` your first virtual environment! Please read
+ the comments in the Vagrantfile as well as documentation on
+ `vagrantup.com` for more information on using Vagrant.
 
 ..
-[alumne@elpuig example]$ ll
+*[alumne@elpuig example]$ ll
 total 4
 -rw-rw-r--. 1 alumne alumne 3020 15 jul. 14:23 Vagrantfile
-[alumne@elpuig example]$
+*[alumne@elpuig example]$
 
 Despres d'aquesta configuració fem aquest pas 
 
 ..
-[alumne@elpuig example]$ vagrant up --provider=virtualbox
+*[alumne@elpuig example]$ vagrant up --provider=virtualbox
 
 
-==> default: Clearing any previously set network interfaces...
+    default: Clearing any previously set network interfaces...
 
-==> default: Preparing network interfaces based on configuration...
+    default: Preparing network interfaces based on configuration...
 
     default: Adapter 1: nat
-
-==> default: Forwarding ports...
+    
+     default: Forwarding ports...
 
     default: 22 (guest) => 2222 (host) (adapter 1)
 
-==> default: Running 'pre-boot' VM customizations...
+    default: Running 'pre-boot' VM customizations...
 
-==> default: Booting VM...
+    default: Booting VM...
 
-==> default: Waiting for machine to boot. This may take a few minutes...
+    default: Waiting for machine to boot. This may take a few minutes...
 
     default: SSH address: 127.0.0.1:2222
 
@@ -61,9 +61,9 @@ Despres d'aquesta configuració fem aquest pas
 
     default: Key inserted! Disconnecting and reconnecting using new SSH key...
 
-==> default: Machine booted and ready!
+    default: Machine booted and ready!
 
-==> default: Checking for guest additions in VM...
+    default: Checking for guest additions in VM...
 
     default: The guest additions on this VM do not match the installed version of
 
@@ -82,16 +82,16 @@ Despres d'aquesta configuració fem aquest pas
 
     default: VirtualBox Version: 6.1
 
-==> default: Mounting shared folders...
+    default: Mounting shared folders...
 
     default: /vagrant => /home/alumne/example
 
 
-[alumne@elpuig example]$
+*[alumne@elpuig example]$
 
 Aquesta comanda descàrrega (les màquines descarregades es guarden a ~/.vagrant.d/) —si cal— la màquina utilitzada, crea una MV a VirtualBox, la configura, l'encén i la prepara amb la clau pública del host per poder iniciar sessió amb ssh.
 
-[alumne@elpuig example]$ vagrant ssh
+**[alumne@elpuig example]$ vagrant ssh
 
 Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-77-generic x86_64)
 
@@ -112,13 +112,21 @@ To see these additional updates run: apt list --upgradable
 
 
 
-vagrant@ubuntu-jammy:~$vagrant@ubuntu-jammy:~$ ll /vagrant
+*vagrant@ubuntu-jammy:~$vagrant@ubuntu-jammy:~$ ll /vagrant
+
+
 total 8
+
 drwxrwxr-x  1 vagrant vagrant   38 Jul 15 12:32 ./
+
 drwxr-xr-x 20 root    root    4096 Jul 15 12:33 ../
+
 drwxrwxr-x  1 vagrant vagrant   32 Jul 15 12:32 .vagrant/
+
 -rw-rw-r--  1 vagrant vagrant 3020 Jul 15 12:23 Vagrantfile
-vagrant@ubuntu-jammy:~$
+
+
+*vagrant@ubuntu-jammy:~$
 
 Per fer visible el servidor apache de la MV a http://localhost:8080 de la màquina física únicament haurem de descomentar la línia següent:
 
@@ -129,50 +137,57 @@ config.vm.network "forwarded_port", guest: 80, host: 8080
 
     Actualització de la màquina.
 
-apt update
+*apt update
 
 
-apt upgrade
+*apt upgrade
 
     Instal·lació del servidor web apache2.
-    
 
-apt install -y apache2
+
+*apt install -y apache2
 
     Instal·lació del servidor de bases de dades mysql-server.
 
-apt install -y mysql-server
+*apt install -y mysql-server
 
     Instal·lació d'algunes llibreries de php, el llenguatge principal que utilitzen les aplicacions.
 
-apt install -y php libapache2-mod-php
-apt install -y php-fpm php-common php-mbstring php-xmlrpc php-soap php-gd php-xml php-intl php-mysql php-cli php-ldap php-zip php-curl
+*apt install -y php libapache2-mod-php
+*apt install -y php-fpm php-common php-mbstring php-xmlrpc php-soap php-gd php-xml php-intl php-mysql php-cli php-ldap php-zip php-curl
 
     Reiniciem el servidor apache2
 
-systemctl restart apache2
+*systemctl restart apache2
 
 Des d'un terminal on siguem root hem d'executar la següent comanda:
 
-root@elpuig:~$ mysql
+*root@elpuig:~$ mysql
 Un cop dins la consola de MySQL executem les comandes per a crear la base de dades. En aquest cas estem creant una base de dades amb el nom bbdd.
 
-CREATE DATABASE bbdd;
-CREATE USER 'usuario'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
-GRANT ALL ON bbdd.* to 'usuario'@'localhost';
+*CREATE DATABASE bbdd;
+
+*CREATE USER 'usuario'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+*GRANT ALL ON bbdd.* to 'usuario'@'localhost';
+
+
 Sortim de la base de dades
 
-exit
+*exit
 Des d'un terminal amb un usuari sense privilegis hem de ser capaços de connectar introduïnt la nostra contrassenya.
 
-alumne@elpuig:~$ mysql -u usuario -p
+*alumne@elpuig:~$ mysql -u usuario -p
+
 Reiniciem el servidor
 
-systemctl restart mysql
+*systemctl restart mysql
 
 Un cop descomprimits els fitxers de l'aplicació web al directori /var/www/html, apliquem els següents permisos al directori /var/www/html
 
-cd /var/www/html
+**cd /var/www/html
+
 chmod -R 775 .
+
 chown -R root:www-data .
 
