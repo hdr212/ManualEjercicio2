@@ -5,19 +5,25 @@ Per a cada projecte vagrant utilitza un directori, com a exemple podem crear el 
 [alumne@elpuig ~]$ mkdir example
 [alumne@elpuig ~]$ cd example/
 
-Despres farem aixo 
+En el primer pas, farem igual que la propera
 
 [alumne@elpuig example]$ vagrant init ubuntu/jammy64
+
+..
 A `Vagrantfile` has been placed in this directory. You are now
 ready to `vagrant up` your first virtual environment! Please read
 the comments in the Vagrantfile as well as documentation on
 `vagrantup.com` for more information on using Vagrant.
+
+..
 [alumne@elpuig example]$ ll
 total 4
 -rw-rw-r--. 1 alumne alumne 3020 15 jul. 14:23 Vagrantfile
 [alumne@elpuig example]$
 
 Despres d'aquesta configuració fem aquest pas 
+
+..
 [alumne@elpuig example]$ vagrant up --provider=virtualbox
 ==> default: Clearing any previously set network interfaces...
 ==> default: Preparing network interfaces based on configuration...
@@ -72,6 +78,7 @@ Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-77-generic x86_64)
 
 1 update can be applied immediately.
 To see these additional updates run: apt list --upgradable
+
 
 
 vagrant@ubuntu-jammy:~$vagrant@ubuntu-jammy:~$ ll /vagrant
