@@ -25,43 +25,74 @@ Despres d'aquesta configuració fem aquest pas
 
 ..
 [alumne@elpuig example]$ vagrant up --provider=virtualbox
+
+
 ==> default: Clearing any previously set network interfaces...
+
 ==> default: Preparing network interfaces based on configuration...
+
     default: Adapter 1: nat
+
 ==> default: Forwarding ports...
+
     default: 22 (guest) => 2222 (host) (adapter 1)
+
 ==> default: Running 'pre-boot' VM customizations...
+
 ==> default: Booting VM...
+
 ==> default: Waiting for machine to boot. This may take a few minutes...
+
     default: SSH address: 127.0.0.1:2222
+
     default: SSH username: vagrant
+
     default: SSH auth method: private key
+
     default: 
     default: Vagrant insecure key detected. Vagrant will automatically replace
+
     default: this with a newly generated keypair for better security.
     default: 
+
     default: Inserting generated public key within guest...
+
     default: Removing insecure key from the guest if it's present...
+
     default: Key inserted! Disconnecting and reconnecting using new SSH key...
+
 ==> default: Machine booted and ready!
+
 ==> default: Checking for guest additions in VM...
+
     default: The guest additions on this VM do not match the installed version of
+
     default: VirtualBox! In most cases this is fine, but in rare cases it can
+
     default: prevent things such as shared folders from working properly. If you see
+
     default: shared folder errors, please make sure the guest additions within the
+
     default: virtual machine match the version of VirtualBox you have installed on
+
     default: your host and reload your VM.
     default: 
+
     default: Guest Additions Version: 6.0.0 r127566
+
     default: VirtualBox Version: 6.1
+
 ==> default: Mounting shared folders...
+
     default: /vagrant => /home/alumne/example
+
 
 [alumne@elpuig example]$
 
 Aquesta comanda descàrrega (les màquines descarregades es guarden a ~/.vagrant.d/) —si cal— la màquina utilitzada, crea una MV a VirtualBox, la configura, l'encén i la prepara amb la clau pública del host per poder iniciar sessió amb ssh.
 
 [alumne@elpuig example]$ vagrant ssh
+
 Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-77-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -91,10 +122,7 @@ vagrant@ubuntu-jammy:~$
 
 Per fer visible el servidor apache de la MV a http://localhost:8080 de la màquina física únicament haurem de descomentar la línia següent:
 
-# Create a forwarded port mapping which allows access to a specific port
-# within the machine from a port on the host machine. In the example below,
-# accessing "localhost:8080" will access port 80 on the guest machine.
-# NOTE: This will enable public access to the opened port
+
 config.vm.network "forwarded_port", guest: 80, host: 8080
 
 
@@ -102,9 +130,12 @@ config.vm.network "forwarded_port", guest: 80, host: 8080
     Actualització de la màquina.
 
 apt update
+
+
 apt upgrade
 
-    nstal·lació del servidor web apache2.
+    Instal·lació del servidor web apache2.
+    
 
 apt install -y apache2
 
